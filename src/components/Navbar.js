@@ -1,14 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   return (
     <nav className="navbar">
-      <h2 className="logo">MediVault.AI</h2>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
-        <li><Link to="/activity">Activity</Link></li>
+      <div className="logo-section">
+        <img src="/MediVault.AI-logo.png" alt="MediVault Logo" className="logo" />
+        <h2>MediVault.AI</h2>
+      </div>
+      <ul className="nav-links">
+        <li>Home</li>
+        <li>Profile</li>
+        <li>Activity</li>
       </ul>
     </nav>
   );
