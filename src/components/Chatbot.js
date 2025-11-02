@@ -1,45 +1,60 @@
 import React, { useState } from "react";
-import { MessageCircle, X } from "lucide-react"; // chatbot + close icons
+import "./Chatbot.css";
+import { FaComments, FaTimes } from "react-icons/fa";
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    { text: "Hi! 👋 I’m your MediVault Assistant. How can I help you today?", sender: "bot" }
+  ]);
   const [input, setInput] = useState("");
 
-  const toggleChat = () => setIsOpen(!isOpen);
-
   const handleSend = () => {
-    if (!input.trim()) return;
-    setMessages([...messages, { text: input, sender: "user" }]);
+    if (input.trim() === "") return;
+
+    const newMessages = [...messages, { text: input, sender: "user" }];
+    setMessages(newMessages);
     setInput("");
-    // Later: send to AI backend
+
+    // Simulate bot response
+    setTimeout(() => {
+      setMessages(prev => [
+        ...prev,
+        { text: "Thanks for your message! 😊 I’ll help you with that.", sender: "bot" }
+      ]);
+    }, 800);
   };
 
   return (
-    <div>
-      {/* Chatbot Floating Button */}
-      <button className="chatbot-icon" onClick={toggleChat}>
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
-      </button>
+    <div className="chatbot-wrapper">
+      {!isOpen && (
+        <button className="chatbot-toggle" onClick={() => setIsOpen(true)}>
+          <FaComments size={25} />
+        </button>
+      )}
 
-      {/* Chat Window */}
       {isOpen && (
-        <div className="chatbot-window">
-          <h4>💬 AI Health Assistant</h4>
-          <div className="chat-window">
-            {messages.map((m, i) => (
-              <p key={i} className={m.sender === "user" ? "user-msg" : "bot-msg"}>
-                {m.text}
-              </p>
+        <div className="chatbot-box">
+          <div className="chatbot-header">
+            <h4>MediVault Assistant</h4>
+            <FaTimes className="close-btn" onClick={() => setIsOpen(false)} />
+          </div>
+
+          <div className="chatbot-messages">
+            {messages.map((msg, index) => (
+              <div key={index} className={`message ${msg.sender}`}>
+                {msg.text}
+              </div>
             ))}
           </div>
 
-          <div className="chat-input">
+          <div className="chatbot-input">
             <input
               type="text"
-              placeholder="Ask about your report..."
+              placeholder="Type a message..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
             />
             <button onClick={handleSend}>Send</button>
           </div>
