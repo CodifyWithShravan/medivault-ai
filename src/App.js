@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -17,9 +17,10 @@ import "./App.css";
 // ✅ Protected Route Wrapper
 function ProtectedRoute({ children }) {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  return isLoggedIn ? children : <Navigate to="/login" />;
+  return isLoggedIn ? children : <Navigate to="/login" replace />;
 }
 
+// ✅ Layout for pages with Navbar
 function LayoutWithNavbar() {
   return (
     <>
@@ -54,12 +55,23 @@ function LayoutWithNavbar() {
   );
 }
 
+// ✅ Layout for pages without Navbar (login/signup)
 function LayoutWithoutNavbar() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route
+        path="/"
+        element={isLoggedIn ? <Navigate to="/home" /> : <Login />}
+      />
+      <Route
+        path="/login"
+        element={isLoggedIn ? <Navigate to="/home" /> : <Login />}
+      />
+      <Route
+        path="/signup"
+        element={isLoggedIn ? <Navigate to="/home" /> : <SignUp />}
+      />
     </Routes>
   );
 }

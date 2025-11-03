@@ -1,28 +1,30 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/MediVault.AI-logo.png"; 
+import logo from "../assets/MediVault.AI-logo.png";
 
-function Login({ onLogin }) {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // ✅ useNavigate is used to redirect to another route
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email && password) {
-      alert("Login successful!");
-      onLogin && onLogin();
-    } else {
+    if (!email || !password) {
       alert("Please fill all fields.");
+      return;
     }
 
-    localStorage.setItem("isLoggedIn", "true");  // ✅ Save login status
-    navigate("/home");
+    // ✅ Save login state
+    localStorage.setItem("isLoggedIn", "true");
 
+    alert("Login successful!");
+
+    // ✅ Small delay to ensure localStorage updates before navigation
+    setTimeout(() => {
+      navigate("/home");
+    }, 100);
   };
 
   return (
@@ -61,7 +63,7 @@ function Login({ onLogin }) {
           </button>
 
           <p className="signup-text">
-            Don’t have an account? <a href="/signup">Register</a>
+            Don’t have an account? <Link to="/signup">Register</Link>
           </p>
         </form>
       </div>
