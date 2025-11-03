@@ -2,8 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 85vh;
-  background-color: #f5f9ff;
+  min-height: 100vh;
+  background: #0078d7;
+  padding-top: 100px; /* 👈 pushes content below navbar */
+  box-sizing: border-box;
 }
 
 .profile-card {
@@ -13,6 +15,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   width: 350px;
   text-align: center;
+  /* margin-top: 100px; push it below navbar */
 }
 
 .profile-header {
