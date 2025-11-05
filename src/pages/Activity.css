@@ -1,33 +1,47 @@
 .activity-page {
-  background: #f4f8fb;
+  margin-top: 800px; /*slightly increased to move further below navbar */
+  /* padding-top: calc(var(--navbar-height) + 20px); 20px extra for breathing space */
+  background: linear-gradient(to bottom, #f0f6ff, #e6f0ff);
   min-height: 100vh;
-  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  z-index: 0;
+  width: 100vw; /* ensures full width of the viewport */
+  box-sizing: border-box; /* prevents overflow issues */
 }
 
+/* Page Title */
 .activity-title {
   text-align: center;
-  font-size: 28px;
-  color: #0078d7;
-  margin-bottom: 30px;
+  font-size: 30px;
+  color: #005cbf;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
 /* Summary Section */
 .summary-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  gap: 25px;
 }
 
 .summary-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 200px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 220px;
   padding: 20px;
   text-align: center;
-  margin: 10px;
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
 }
 
 .summary-card h3 {
@@ -44,46 +58,76 @@
 
 /* Chart Section */
 .chart-section {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  margin-bottom: 40px;
 }
 
 .chart-section h2 {
-  color: #0078d7;
+  color: #005cbf !important;
   margin-bottom: 20px;
   text-align: center;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 /* Reports Section */
 .reports-section {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
 }
+
 
 .reports-section h2 {
-  color: #0078d7;
+  color: #0078d7 !important;
+  font-size: 22px;
   margin-bottom: 20px;
   text-align: center;
+  font-weight: 600;
+  z-index: 2;
+  position: relative;
 }
 
+
+/* Table Styling */
 .reports-section table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 16px;
 }
 
 .reports-section th,
 .reports-section td {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e0e0e0;
   text-align: center;
-  padding: 10px;
+  padding: 12px;
 }
 
 .reports-section th {
   background-color: #0078d7;
   color: white;
+  font-weight: 600;
+}
+
+.reports-section tr:hover {
+  background-color: #f8faff;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .activity-page {
+    margin-top: 100px; /* slightly more space on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-page {
+    margin-top: 120px; /* more for very small screens */
+  }
 }
